@@ -11,9 +11,8 @@ const get = async (filter) => {
   } 
   else if(search !=="" && startDate==="" && endDate==="" ){
     return await  gamesModel.find().or([
-        {name:{$regex:'.*' + search + '.*'}},
-        {category:{$regex:'.*' + search + '.*'}},
-        
+        {name: {$regex: new RegExp(search, "i")}},
+    {category: {$regex: new RegExp(search, "i")}}
     ])
   }
   else if(search ==="" && startDate!=="" && endDate!=="" ){
@@ -24,8 +23,8 @@ const get = async (filter) => {
         $and: [
           { created: { $gte: startDate, $lte: endDate } },
           { $or: [
-              { name: { $regex: search } },
-              { category: { $regex: search } }
+            {name: {$regex: new RegExp(search, "i")}},
+            {category: {$regex: new RegExp(search, "i")}}
             ]
           }
         ]

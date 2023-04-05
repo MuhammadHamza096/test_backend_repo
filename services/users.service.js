@@ -11,10 +11,10 @@ const get = async (filter) => {
   } 
   else{
     return await  userModel.find().or([
-        {name:{$regex:'.*' + searchValue + '.*'}},
-        {email:{$regex:'.*' + searchValue + '.*'}},
-        {address:{$regex:'.*' + searchValue + '.*'}},
-        
+        {name:{ $regex: new RegExp(searchValue, "i")}},
+        {email:{ $regex: new RegExp(searchValue, "i")}},
+        {address:{ $regex: new RegExp(searchValue, "i")}},
+       
     ])
   }
   
